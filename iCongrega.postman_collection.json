@@ -1,0 +1,4145 @@
+{
+	"info": {
+		"_postman_id": "982c97cd-ad47-4dd1-8294-cb5b903244fd",
+		"name": "iCongrega",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50065090",
+		"_collection_link": "https://speeding-meadow-332914.postman.co/workspace/PortalTec~50c7f94e-2533-436d-81e2-4cc03584a88a/collection/22914229-982c97cd-ad47-4dd1-8294-cb5b903244fd?action=share&source=collection_link&creator=50065090"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Churches",
+					"item": [
+						{
+							"name": "Church roles",
+							"item": [
+								{
+									"name": "permissions",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{access_token}}",
+												"type": "text"
+											},
+											{
+												"key": "admin-api-key",
+												"value": "{{admin_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{domain}}/api/{{version}}/admin/permissions",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"api",
+												"{{version}}",
+												"admin",
+												"permissions"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "list roles for religion",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{access_token}}",
+												"type": "text"
+											},
+											{
+												"key": "admin-api-key",
+												"value": "{{admin_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{domain}}/api/{{version}}/admin/church-roles?religion_id=1",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"api",
+												"{{version}}",
+												"admin",
+												"church-roles"
+											],
+											"query": [
+												{
+													"key": "religion_id",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "list roles for church",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{access_token}}",
+												"type": "text"
+											},
+											{
+												"key": "admin-api-key",
+												"value": "{{admin_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": []
+										},
+										"url": {
+											"raw": "{{domain}}/api/{{version}}/admin/churches/1/roles",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"api",
+												"{{version}}",
+												"admin",
+												"churches",
+												"1",
+												"roles"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "show church role",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{access_token}}",
+												"type": "text"
+											},
+											{
+												"key": "admin-api-key",
+												"value": "{{admin_api_key}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{domain}}/api/{{version}}/admin/church-roles/1",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"api",
+												"{{version}}",
+												"admin",
+												"church-roles",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "create church role",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{access_token}}",
+												"type": "text"
+											},
+											{
+												"key": "admin-api-key",
+												"value": "{{admin_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"church_id\": 1,\r\n    \"name\": \"Apóstol\",\r\n    \"description\": \"Apóstol de la iglesia\",\r\n    \"permission_ids\": [1,2,3,4,5,6,7,8,9,10,11]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/api/{{version}}/admin/church-roles",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"api",
+												"{{version}}",
+												"admin",
+												"church-roles"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "update church role",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{access_token}}",
+												"type": "text"
+											},
+											{
+												"key": "admin-api-key",
+												"value": "{{admin_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"_method\": \"PUT\",\r\n    \"name\": \"Apóstol\",\r\n    \"description\": \"Apóstol de la iglesia\",\r\n    \"permission_ids\": [1,2,3,4,5,6,7,8,9,10,11]\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/api/{{version}}/admin/church-roles/1",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"api",
+												"{{version}}",
+												"admin",
+												"church-roles",
+												"1"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "delete church role",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{access_token}}",
+												"type": "text"
+											},
+											{
+												"key": "admin-api-key",
+												"value": "{{admin_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"_method\": \"DELETE\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/api/{{version}}/admin/church-roles/8",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"api",
+												"{{version}}",
+												"admin",
+												"church-roles",
+												"8"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Assign roles",
+							"item": [
+								{
+									"name": "assign user role",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{access_token}}",
+												"type": "text"
+											},
+											{
+												"key": "admin-api-key",
+												"value": "{{admin_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"church_id\": 1,\r\n    \"user_id\": 2,\r\n    \"church_role_id\": 1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/api/{{version}}/admin/churches/assign-user-role",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"api",
+												"{{version}}",
+												"admin",
+												"churches",
+												"assign-user-role"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "assign owner",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{access_token}}",
+												"type": "text"
+											},
+											{
+												"key": "admin-api-key",
+												"value": "{{admin_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"church_id\": 1,\r\n    \"user_id\": 2\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/api/{{version}}/admin/churches/assign-owner",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"api",
+												"{{version}}",
+												"admin",
+												"churches",
+												"assign-owner"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "remove user role",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{access_token}}",
+												"type": "text"
+											},
+											{
+												"key": "admin-api-key",
+												"value": "{{admin_api_key}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"_method\": \"DELETE\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{domain}}/api/{{version}}/admin/churches/3/users/2/role",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"api",
+												"{{version}}",
+												"admin",
+												"churches",
+												"3",
+												"users",
+												"2",
+												"role"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "get users with roles",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"type": "text"
+											},
+											{
+												"key": "Authorization",
+												"value": "{{access_token}}",
+												"type": "text"
+											},
+											{
+												"key": "admin-api-key",
+												"value": "{{admin_api_key}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{domain}}/api/{{version}}/admin/churches/3/users-with-roles",
+											"host": [
+												"{{domain}}"
+											],
+											"path": [
+												"api",
+												"{{version}}",
+												"admin",
+												"churches",
+												"3",
+												"users-with-roles"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "list churchs",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "admin-api-key",
+										"value": "{{admin_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/admin/churches",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"admin",
+										"churches"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show church",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "admin-api-key",
+										"value": "{{admin_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/admin/churches/1",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"admin",
+										"churches",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create church",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "admin-api-key",
+										"value": "{{admin_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Iglesia Apostólica Enmanuel\",\r\n    \"description\": \"Somos reino en movimiento\",\r\n    \"image\": \"churchs/qlnUxz4bSoIgX2fOaTyV1iHIJaYZMr6fILBQYweR.jpg\",\r\n    \"religion_id\": 1,\r\n    \"location_text\": \"Gabaón, Iglesia Apostólica Emmanuel, Sector Araguaney, Santa Bárbara de Zulia 5148, Zulia\",\r\n    \"google_maps_link\": \"https://maps.app.goo.gl/ysZTgZ4ggiwnAWWy8\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/admin/churches",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"admin",
+										"churches"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update church",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "admin-api-key",
+										"value": "{{admin_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"_method\": \"PUT\",\r\n    \"name\": \"Iglesia Apostólica Enmanuel\",\r\n    \"description\": \"Somos reino en movimiento\",\r\n    \"image\": \"churches/6o5GgpsiLD6UlEIjlupMbthPPYduFy8MdCea6tdc.jpg\",\r\n    \"religion_id\": 1,\r\n    \"location_text\": \"Gabaón, Iglesia Apostólica Emmanuel, Sector Araguaney, Santa Bárbara de Zulia 5148, Zulia\",\r\n    \"google_maps_link\": \"https://maps.app.goo.gl/ysZTgZ4ggiwnAWWy8\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/admin/churches/1",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"admin",
+										"churches",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete church",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "admin-api-key",
+										"value": "{{admin_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "_method",
+											"value": "DELETE",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/admin/churches/1",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"admin",
+										"churches",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code == 200) {\r",
+									"    var token_type = pm.response.json().token_type;\r",
+									"    var token = pm.response.json().token;\r",
+									"\r",
+									"    pm.environment.set('access_token', token_type+' '+token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "admin-api-key",
+								"value": "{{admin_api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"gerenciaportaltec@gmail.com\",\r\n    \"password\": \"icongrega#2026\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/admin/login",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code == 200) {\r",
+									"    var token_type = pm.response.json().token_type;\r",
+									"    var token = pm.response.json().token;\r",
+									"\r",
+									"    pm.environment.set('access_token', token_type+' '+token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"webmasterpuerta1996@gmail.com\",\r\n    \"password\": \"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/auth/login",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"webmasterpuerta1996@gmail.com\",\r\n    \"password\": \"123456789\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/auth/login",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 17:24:43 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 17:24:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Login exitoso\",\n    \"user\": {\n        \"id\": 2,\n        \"name\": \"Jose\",\n        \"lastname\": \"Puerta\",\n        \"email\": \"webmasterpuerta1996@gmail.com\",\n        \"religion_id\": 1\n    },\n    \"token_type\": \"Bearer\",\n    \"token\": \"5|Z2DmLww10ZxU5oof5nDvyPB8DNSvq7zcrvq9rvTV38370c4a\"\n}"
+						},
+						{
+							"name": "401",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"webmasterpuerta1996@gmail.com\",\r\n    \"password\": \"1234567892\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/auth/login",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 17:25:01 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 17:25:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Credenciales incorrectas\"\n}"
+						}
+					]
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Jose\",\r\n  \"lastname\": \"Puerta\",\r\n  \"email\": \"webmasterpuerta1996@gmail.com\",\r\n  \"religion_id\": 1,\r\n  \"password\": \"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/auth/register",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Jose\",\r\n  \"lastname\": \"Puerta\",\r\n  \"email\": \"webmasterpuerta1996@gmail.com\",\r\n  \"religion_id\": 1,\r\n  \"password\": \"123456789\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/auth/register",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 17:16:37 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 17:16:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Registro exitoso. Por favor verifica tu email con el código enviado.\",\n    \"email\": \"webmasterpuerta1996@gmail.com\"\n}"
+						},
+						{
+							"name": "422",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Jose\",\r\n  \"lastname\": \"Puerta\",\r\n  \"email\": \"webmasterpuerta1996@gmail.com\",\r\n  \"religion_id\": 1,\r\n  \"password\": \"123456789\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/auth/register",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"status": "Unprocessable Content",
+							"code": 422,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 17:17:46 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 17:17:46 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"El correo electrónico ya ha sido tomado.\",\n    \"errors\": {\n        \"email\": [\n            \"El correo electrónico ya ha sido tomado.\"\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "verify email code",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code == 200) {\r",
+									"    var token_type = pm.response.json().token_type;\r",
+									"    var token = pm.response.json().token;\r",
+									"\r",
+									"    pm.environment.set('access_token', token_type+' '+token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"webmasterpuerta1996@gmail.com\",\r\n  \"code\": \"436464\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/auth/verify-email",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"auth",
+								"verify-email"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"webmasterpuerta1996@gmail.com\",\r\n  \"code\": \"436464\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/auth/verify-email",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"auth",
+										"verify-email"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 17:17:28 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 17:17:28 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Email verificado exitosamente. Tu cuenta ha sido creada.\",\n    \"user\": {\n        \"id\": 2,\n        \"name\": \"Jose\",\n        \"lastname\": \"Puerta\",\n        \"email\": \"webmasterpuerta1996@gmail.com\",\n        \"religion_id\": 1\n    },\n    \"token_type\": \"Bearer\",\n    \"token\": \"1|FC7yXYs9MkkoB1F9nCco84DKplYKzguKQsAmjGmK09e71a99\"\n}"
+						},
+						{
+							"name": "400",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "app-api-key",
+										"value": "{{app_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"email\": \"miguel.vilchez.1505@gmail.com\",\r\n  \"code\": \"061090\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/auth/verify-email",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"auth",
+										"verify-email"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Server",
+									"value": "nginx/1.24.0 (Ubuntu)"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 14 Nov 2025 14:22:32 GMT"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Código de verificación inválido o expirado\"\n}"
+						}
+					]
+				},
+				{
+					"name": "me",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/auth/me",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"auth",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"_method\": \"PUT\",\r\n  \"name\": \"Jose\",\r\n  \"lastname\": \"Puerta\",\r\n  \"profile_image\": \"users/2/8GU1yslwgPmEKgKso1G2QI3b4HYd3qKmqZscDfxq.jpg\",\r\n  \"religion_id\": 1,\r\n  \"about\": \"Soy cristiano desde los 15 años y adoro mucho a Dios a el le debo todo.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/auth/profile",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"auth",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"webmasterpuerta1996@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/auth/forgot-password",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"auth",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "validate reset code",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"webmasterpuerta1996@gmail.com\",\r\n    \"code\": \"801767\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/auth/validate-password-reset-code",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"auth",
+								"validate-password-reset-code"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code == 200) {\r",
+									"    var token_type = pm.response.json().token_type;\r",
+									"    var token = pm.response.json().token;\r",
+									"\r",
+									"    pm.environment.set('access_token', token_type+' '+token);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"webmasterpuerta1996@gmail.com\",\r\n    \"code\": \"801767\",\r\n    \"password\": \"instalacion\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/auth/reset-password",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"auth",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/auth/logout",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "religions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/auth/religions",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"auth",
+								"religions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contact",
+			"item": [
+				{
+					"name": "contact methods",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/contact-methods",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"contact-methods"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "send contact form",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"webmasterpuerta1996@gmail.com\",\r\n    \"message\": \"Hola mundo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/contact",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"contact"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "religion request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"webmasterpuerta1996@gmail.com\",\r\n    \"religion\": \"Mormon\",\r\n    \"message\": \"Hola mundo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/religion-request",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"religion-request"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Churches",
+			"item": [
+				{
+					"name": "all churches",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/churches?per_page=15",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"churches"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "15"
+								},
+								{
+									"key": "search",
+									"value": "nueva esperanza",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show church",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/churches/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"churches",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "follow church",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/churches/1/follow",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"churches",
+								"1",
+								"follow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unfollow church",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/churches/1/unfollow",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"churches",
+								"1",
+								"unfollow"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "my list churches",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/churches/my/list",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"churches",
+								"my",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "posts church",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/churches/1/posts",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"churches",
+								"1",
+								"posts"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "image",
+									"description": "ej: image, text, video",
+									"disabled": true
+								},
+								{
+									"key": "per_page",
+									"value": "15",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "team church",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/churches/1/team",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"churches",
+								"1",
+								"team"
+							],
+							"query": [
+								{
+									"key": "per_page",
+									"value": "15",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "report church",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"church_id\": 1,\r\n    \"reason_id\": 8,\r\n    \"reason\": null, // por defecto es el nombre de la razon, se puede enviar pero si no se envia toma el name de la razon con el reason_id es opcional\r\n    \"description\": null // si el usuario envia descripcion de algo opcional, pero obligatorio si la razon seleccionada tiene true en su campo is_other\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/churches/report",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"churches",
+								"report"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "Comments",
+					"item": [
+						{
+							"name": "list comments",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "app-api-key",
+										"value": "{{app_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/posts/3/comments",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"posts",
+										"3",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create comment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "app-api-key",
+										"value": "{{app_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"post_id\": 1,\r\n    \"comment\": \"Hola que hace\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/comments",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"comments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete comment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "app-api-key",
+										"value": "{{app_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"_method\": \"DELETE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/comments/1",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"comments",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "like comment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "app-api-key",
+										"value": "{{app_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/comments/1/like",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"comments",
+										"1",
+										"like"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "unlike comment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "app-api-key",
+										"value": "{{app_api_key}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/comments/2/unlike",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"comments",
+										"2",
+										"unlike"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "report comment",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "app-api-key",
+										"value": "{{app_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"comment_id\": 1,\r\n    \"reason_id\": 1,\r\n    \"reason\": null, // por defecto es el nombre de la razon, se puede enviar pero si no se envia toma el name de la razon con el reason_id es opcional\r\n    \"description\": null // si el usuario envia descripcion de algo opcional, pero obligatorio si la razon seleccionada tiene true en su campo is_other\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/comments/report",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"comments",
+										"report"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "list posts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/posts?per_page=15",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"posts"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "",
+									"description": "types = 'image','text','video'",
+									"disabled": true
+								},
+								{
+									"key": "per_page",
+									"value": "15"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/posts?per_page=15",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"posts"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "",
+											"description": "types = 'image','text','video'",
+											"disabled": true
+										},
+										{
+											"key": "per_page",
+											"value": "15"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 18:25:22 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 18:25:22 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"posts\": [\n        {\n            \"id\": 4,\n            \"type\": \"video\",\n            \"user\": {\n                \"id\": 2,\n                \"name\": \"Jose\",\n                \"lastname\": \"Puerta\",\n                \"email\": \"webmasterpuerta1996@gmail.com\"\n            },\n            \"church\": {\n                \"id\": 1,\n                \"name\": \"Iglesia Apostólica Enmanuel\"\n            },\n            \"date\": \"2025-11-09\",\n            \"description\": \"Lotem ipsum dolor sit amet dolorenque amet sit\",\n            \"likes\": 0,\n            \"comments\": 0,\n            \"is_liked\": false,\n            \"image_url\": null,\n            \"video_url\": \"posts/1/4/KIlwVRmpp1jSzAZhSbwJVHbn9eWUr8fa9AsXVIZt.mp4\",\n            \"text\": null,\n            \"background_color\": null,\n            \"status\": \"active\",\n            \"status_note\": null,\n            \"created_at\": \"2025-11-09T17:43:19.000000Z\",\n            \"updated_at\": \"2025-11-09T17:43:19.000000Z\"\n        },\n        {\n            \"id\": 3,\n            \"type\": \"image\",\n            \"user\": {\n                \"id\": 2,\n                \"name\": \"Jose\",\n                \"lastname\": \"Puerta\",\n                \"email\": \"webmasterpuerta1996@gmail.com\"\n            },\n            \"church\": {\n                \"id\": 1,\n                \"name\": \"Iglesia Apostólica Enmanuel\"\n            },\n            \"date\": \"2025-11-08\",\n            \"description\": \"Lotem ipsum dolor sit amet dolorenque amet sit\",\n            \"likes\": 0,\n            \"comments\": 0,\n            \"is_liked\": false,\n            \"image_url\": \"posts/1/3/DL0pYZ0PrROtZKhfIOn4oDC6WbjfGrY92IuCWyGD.jpg\",\n            \"video_url\": null,\n            \"text\": null,\n            \"background_color\": null,\n            \"status\": \"active\",\n            \"status_note\": null,\n            \"created_at\": \"2025-11-09T17:32:05.000000Z\",\n            \"updated_at\": \"2025-11-09T17:32:05.000000Z\"\n        },\n        {\n            \"id\": 1,\n            \"type\": \"text\",\n            \"user\": {\n                \"id\": 2,\n                \"name\": \"Jose\",\n                \"lastname\": \"Puerta\",\n                \"email\": \"webmasterpuerta1996@gmail.com\"\n            },\n            \"church\": {\n                \"id\": 1,\n                \"name\": \"Iglesia Apostólica Enmanuel\"\n            },\n            \"date\": \"2025-11-08\",\n            \"description\": \"Lotem ipsum dolor sit amet dolorenque amet sit modificado\",\n            \"likes\": 0,\n            \"comments\": 0,\n            \"is_liked\": false,\n            \"image_url\": null,\n            \"video_url\": null,\n            \"text\": \"En el principio la tierra era desordenada y vacia Genesis 1:1\",\n            \"background_color\": \"#FF0000\",\n            \"status\": \"active\",\n            \"status_note\": null,\n            \"created_at\": \"2025-11-09T17:25:54.000000Z\",\n            \"updated_at\": \"2025-11-09T18:04:33.000000Z\"\n        }\n    ],\n    \"pagination\": {\n        \"current_page\": 1,\n        \"last_page\": 1,\n        \"per_page\": 15,\n        \"total\": 3,\n        \"has_more_pages\": false,\n        \"next_page\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "show post",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/posts/3",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"posts",
+								"3"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "",
+									"description": "types = 'image','text','video'",
+									"disabled": true
+								},
+								{
+									"key": "per_page",
+									"value": "15",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/posts/1",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"posts",
+										"1"
+									],
+									"query": [
+										{
+											"key": "type",
+											"value": "",
+											"description": "types = 'image','text','video'",
+											"disabled": true
+										},
+										{
+											"key": "per_page",
+											"value": "15",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 18:25:40 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 18:25:40 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"post\": {\n        \"id\": 1,\n        \"type\": \"text\",\n        \"user\": {\n            \"id\": 2,\n            \"name\": \"Jose\",\n            \"lastname\": \"Puerta\",\n            \"email\": \"webmasterpuerta1996@gmail.com\"\n        },\n        \"church\": {\n            \"id\": 1,\n            \"name\": \"Iglesia Apostólica Enmanuel\"\n        },\n        \"date\": \"2025-11-08\",\n        \"description\": \"Lotem ipsum dolor sit amet dolorenque amet sit modificado\",\n        \"likes\": 0,\n        \"comments\": 0,\n        \"is_liked\": false,\n        \"image_url\": null,\n        \"video_url\": null,\n        \"text\": \"En el principio la tierra era desordenada y vacia Genesis 1:1\",\n        \"background_color\": \"#FF0000\",\n        \"status\": \"active\",\n        \"status_note\": null,\n        \"created_at\": \"2025-11-09T17:25:54.000000Z\",\n        \"updated_at\": \"2025-11-09T18:04:33.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "create post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"text\", // ej: \"text\", \"image\", \"video\"\r\n    \"church_id\": 1,\r\n    \"user_id\": 2, // usuario al cual se le va asignar el post, ej: el pastor de la predica\r\n    \"date\": \"2025-11-08\", // fecha para el post, puede ser la fecha actual o la fecha del servicio\r\n    \"description\": \"Lotem ipsum dolor sit amet dolorenque amet sit\",\r\n    \"image_url\": null,\r\n    \"video_url\": null,\r\n    \"text\": \"En el principio la tierra era desordenada y vacia Genesis 1:1\",\r\n    \"background_color\": \"#FF0000\" // color en hexadecimal\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/posts",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"posts"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "create post text",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "app-api-key",
+										"value": "{{app_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\": \"text\", // ej: \"text\", \"image\", \"video\"\r\n    \"church_id\": 1,\r\n    \"user_id\": 2, // usuario al cual se le va asignar el post, ej: el pastor de la predica\r\n    \"date\": \"2025-11-08\", // fecha para el post, puede ser la fecha actual o la fecha del servicio\r\n    \"description\": \"Lotem ipsum dolor sit amet dolorenque amet sit\",\r\n    \"image_url\": null,\r\n    \"video_url\": null,\r\n    \"text\": \"En el principio la tierra era desordenada y vacia Genesis 1:1\",\r\n    \"background_color\": \"#FF0000\" // color en hexadecimal\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/posts",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"posts"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "create post image",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "app-api-key",
+										"value": "{{app_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\": \"image\", // ej: \"text\", \"image\", \"video\"\r\n    \"church_id\": 1,\r\n    \"user_id\": 2, // usuario al cual se le va asignar el post, ej: el pastor de la predica\r\n    \"date\": \"2025-11-08\", // fecha para el post, puede ser la fecha actual o la fecha del servicio\r\n    \"description\": \"Lotem ipsum dolor sit amet dolorenque amet sit\",\r\n    \"image_url\": \"posts/DL0pYZ0PrROtZKhfIOn4oDC6WbjfGrY92IuCWyGD.jpg\",\r\n    \"video_url\": null,\r\n    \"text\": null,\r\n    \"background_color\": null // color en hexadecimal\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/posts",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"posts"
+									]
+								}
+							},
+							"_postman_previewlanguage": "",
+							"header": [],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": ""
+						},
+						{
+							"name": "create post video",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									},
+									{
+										"key": "app-api-key",
+										"value": "{{app_api_key}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\": \"video\", // ej: \"text\", \"image\", \"video\"\r\n    \"church_id\": 1,\r\n    \"user_id\": 2, // usuario al cual se le va asignar el post, ej: el pastor de la predica\r\n    \"date\": \"2025-11-09\", // fecha para el post, puede ser la fecha actual o la fecha del servicio\r\n    \"description\": \"Lotem ipsum dolor sit amet dolorenque amet sit\",\r\n    \"image_url\": null,\r\n    // si el video es muy pesado considera pasar video_url como null y en el update lo insertamos\r\n    \"video_url\": \"posts/1/KIlwVRmpp1jSzAZhSbwJVHbn9eWUr8fa9AsXVIZt.mp4\",\r\n    \"text\": null,\r\n    \"background_color\": null // color en hexadecimal\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/posts",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"posts"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "201",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"type\": \"text\", // ej: \"text\", \"image\", \"video\"\r\n    \"church_id\": 1,\r\n    \"user_id\": 2, // usuario al cual se le va asignar el post, ej: el pastor de la predica\r\n    \"date\": \"2025-11-08\", // fecha para el post, puede ser la fecha actual o la fecha del servicio\r\n    \"description\": \"Lotem ipsum dolor sit amet dolorenque amet sit\",\r\n    \"image_url\": null,\r\n    \"video_url\": null,\r\n    \"text\": \"En el principio la tierra era desordenada y vacia Genesis 1:1\",\r\n    \"background_color\": \"#FF0000\" // color en hexadecimal\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/posts",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"posts"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 17:26:27 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 17:26:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Post creado exitosamente.\",\n    \"post\": {\n        \"id\": 2,\n        \"type\": \"text\",\n        \"user\": {\n            \"id\": 2,\n            \"name\": \"Jose\",\n            \"lastname\": \"Puerta\",\n            \"email\": \"webmasterpuerta1996@gmail.com\"\n        },\n        \"church\": {\n            \"id\": 1,\n            \"name\": \"Iglesia Apostólica Enmanuel\"\n        },\n        \"date\": \"2025-11-08\",\n        \"description\": \"Lotem ipsum dolor sit amet dolorenque amet sit\",\n        \"likes\": 0,\n        \"comments\": 0,\n        \"is_liked\": false,\n        \"image_url\": null,\n        \"video_url\": null,\n        \"text\": \"En el principio la tierra era desordenada y vacia Genesis 1:1\",\n        \"background_color\": \"#FF0000\",\n        \"status\": \"active\",\n        \"status_note\": null,\n        \"created_at\": \"2025-11-09T17:26:27.000000Z\",\n        \"updated_at\": \"2025-11-09T17:26:27.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_method\": \"PUT\",\r\n    \"type\": \"text\", // ej: \"text\", \"image\", \"video\"\r\n    \"church_id\": 1,\r\n    \"user_id\": 2, // usuario al cual se le va asignar el post, ej: el pastor de la predica\r\n    \"date\": \"2025-11-08\", // fecha para el post, puede ser la fecha actual o la fecha del servicio\r\n    \"description\": \"Lotem ipsum dolor sit amet dolorenque amet sit modificado\",\r\n    \"image_url\": null,\r\n    \"video_url\": null,\r\n    \"text\": \"En el principio la tierra era desordenada y vacia Genesis 1:1\",\r\n    \"background_color\": \"#FF0000\" // color en hexadecimal\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/posts/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"_method\": \"PUT\",\r\n    \"type\": \"text\", // ej: \"text\", \"image\", \"video\"\r\n    \"church_id\": 1,\r\n    \"user_id\": 2, // usuario al cual se le va asignar el post, ej: el pastor de la predica\r\n    \"date\": \"2025-11-08\", // fecha para el post, puede ser la fecha actual o la fecha del servicio\r\n    \"description\": \"Lotem ipsum dolor sit amet dolorenque amet sit modificado\",\r\n    \"image_url\": null,\r\n    \"video_url\": null,\r\n    \"text\": \"En el principio la tierra era desordenada y vacia Genesis 1:1\",\r\n    \"background_color\": \"#FF0000\" // color en hexadecimal\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/posts/1",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"posts",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 18:25:02 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 18:25:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Post actualizado exitosamente.\",\n    \"post\": {\n        \"id\": 1,\n        \"type\": \"text\",\n        \"user\": {\n            \"id\": 2,\n            \"name\": \"Jose\",\n            \"lastname\": \"Puerta\",\n            \"email\": \"webmasterpuerta1996@gmail.com\"\n        },\n        \"church\": {\n            \"id\": 1,\n            \"name\": \"Iglesia Apostólica Enmanuel\"\n        },\n        \"date\": \"2025-11-08\",\n        \"description\": \"Lotem ipsum dolor sit amet dolorenque amet sit modificado\",\n        \"likes\": 0,\n        \"comments\": 0,\n        \"is_liked\": false,\n        \"image_url\": null,\n        \"video_url\": null,\n        \"text\": \"En el principio la tierra era desordenada y vacia Genesis 1:1\",\n        \"background_color\": \"#FF0000\",\n        \"status\": \"active\",\n        \"status_note\": null,\n        \"created_at\": \"2025-11-09T17:25:54.000000Z\",\n        \"updated_at\": \"2025-11-09T18:04:33.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "delete post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"_method\": \"DELETE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/posts/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"_method\": \"DELETE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/posts/1",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"posts",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 18:25:56 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 18:25:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Post eliminado exitosamente.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "like post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/posts/3/like",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"posts",
+								"3",
+								"like"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/posts/3/like",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"posts",
+										"3",
+										"like"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 18:34:27 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 18:34:27 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Like agregado exitosamente.\",\n    \"post\": {\n        \"id\": 3,\n        \"type\": \"image\",\n        \"user\": {\n            \"id\": 2,\n            \"name\": \"Jose\",\n            \"lastname\": \"Puerta\",\n            \"email\": \"webmasterpuerta1996@gmail.com\"\n        },\n        \"church\": {\n            \"id\": 1,\n            \"name\": \"Iglesia Apostólica Enmanuel\"\n        },\n        \"date\": \"2025-11-08\",\n        \"description\": \"Lotem ipsum dolor sit amet dolorenque amet sit\",\n        \"likes\": 2,\n        \"comments\": 0,\n        \"is_liked\": true,\n        \"image_url\": \"posts/1/3/DL0pYZ0PrROtZKhfIOn4oDC6WbjfGrY92IuCWyGD.jpg\",\n        \"video_url\": null,\n        \"text\": null,\n        \"background_color\": null,\n        \"status\": \"active\",\n        \"status_note\": null,\n        \"created_at\": \"2025-11-09T17:32:05.000000Z\",\n        \"updated_at\": \"2025-11-09T18:34:27.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "unlike post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/posts/3/unlike",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"posts",
+								"3",
+								"unlike"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/posts/3/unlike",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"posts",
+										"3",
+										"unlike"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 18:37:05 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 18:37:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Like removido exitosamente.\",\n    \"post\": {\n        \"id\": 3,\n        \"type\": \"image\",\n        \"user\": {\n            \"id\": 2,\n            \"name\": \"Jose\",\n            \"lastname\": \"Puerta\",\n            \"email\": \"webmasterpuerta1996@gmail.com\"\n        },\n        \"church\": {\n            \"id\": 1,\n            \"name\": \"Iglesia Apostólica Enmanuel\"\n        },\n        \"date\": \"2025-11-08\",\n        \"description\": \"Lotem ipsum dolor sit amet dolorenque amet sit\",\n        \"likes\": 1,\n        \"comments\": 0,\n        \"is_liked\": false,\n        \"image_url\": \"posts/1/3/DL0pYZ0PrROtZKhfIOn4oDC6WbjfGrY92IuCWyGD.jpg\",\n        \"video_url\": null,\n        \"text\": null,\n        \"background_color\": null,\n        \"status\": \"active\",\n        \"status_note\": null,\n        \"created_at\": \"2025-11-09T17:32:05.000000Z\",\n        \"updated_at\": \"2025-11-09T18:37:05.000000Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "my likes posts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/posts/my-likes",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"posts",
+								"my-likes"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "type",
+									"value": "image",
+									"description": "ej: ''text, 'image', 'video'",
+									"disabled": true
+								},
+								{
+									"key": "per_page",
+									"value": "15",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "report post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"post_id\": 3,\r\n    \"reason_id\": 1,\r\n    \"reason\": null, // por defecto es el nombre de la razon, se puede enviar pero si no se envia toma el name de la razon con el reason_id es opcional\r\n    \"description\": null // si el usuario envia descripcion de algo opcional, pero obligatorio si la razon seleccionada tiene true en su campo is_other\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/posts/report",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"posts",
+								"report"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "block post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/posts/1/block",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"posts",
+								"1",
+								"block"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unblock post",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/posts/1/unblock",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"posts",
+								"1",
+								"unblock"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Upload Files",
+			"item": [
+				{
+					"name": "upload file",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "postman-cloud:///1ef9019b-2b03-4810-b025-977e892926d4"
+								},
+								{
+									"key": "folder",
+									"value": "users/2",
+									"description": "carpeta en la cual se guardara el archivo",
+									"type": "text"
+								},
+								{
+									"key": "church_id",
+									"value": "1",
+									"description": "opcional, se pasa cuando queremos asignar directamente el archivo a la iglesia",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "content_type",
+									"value": "user_image",
+									"description": "ej: 'church_image', 'post_image', 'post_video', 'user_image'",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/upload/file",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"upload",
+								"file"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "postman-cloud:///1eed5007-dfec-4930-b672-99d64ccaa21e"
+										},
+										{
+											"key": "folder",
+											"value": "posts",
+											"description": "carpeta en la cual se guardara el archivo",
+											"type": "text"
+										},
+										{
+											"key": "church_id",
+											"value": "1",
+											"description": "opcional, se pasa cuando queremos asignar directamente el archivo a la iglesia",
+											"type": "text"
+										},
+										{
+											"key": "content_type",
+											"value": "post_image",
+											"description": "ej: 'church_image', 'post_image', 'post_video', etc.",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{domain}}/api/{{version}}/upload/file",
+									"host": [
+										"{{domain}}"
+									],
+									"path": [
+										"api",
+										"{{version}}",
+										"upload",
+										"file"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 17:31:26 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Nov 2025 17:31:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.1"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Archivo subido exitosamente\",\n    \"upload_type\": \"direct\",\n    \"file_path\": \"posts/DL0pYZ0PrROtZKhfIOn4oDC6WbjfGrY92IuCWyGD.jpg\",\n    \"file_url\": \"http://127.0.0.1:8000/storage/posts/DL0pYZ0PrROtZKhfIOn4oDC6WbjfGrY92IuCWyGD.jpg\",\n    \"file_size_kb\": 105.8\n}"
+						}
+					]
+				},
+				{
+					"name": "presigned url",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "folder",
+									"value": "churches",
+									"type": "text"
+								},
+								{
+									"key": "filename",
+									"value": "foto-perfil-prueba.jpg",
+									"description": "opcionalmente le pasamos el nombre del archivo desde el front",
+									"type": "text"
+								},
+								{
+									"key": "mime_type",
+									"value": "image/jpeg",
+									"type": "text"
+								},
+								{
+									"key": "content_type",
+									"value": "church_image",
+									"description": "ej: 'church_image', 'post_image', 'post_video', etc.",
+									"type": "text"
+								},
+								{
+									"key": "expiration_minutes",
+									"value": "60",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/upload/presigned-url",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"upload",
+								"presigned-url"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Plans",
+			"item": [
+				{
+					"name": "list plans",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/plans",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"plans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show plan",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/plans/1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"plans",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Report reasons",
+			"item": [
+				{
+					"name": "list reasons posts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/report-reasons/posts",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"report-reasons",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list reasons comments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/report-reasons/comments",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"report-reasons",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list reasons churches",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/report-reasons/churches",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"report-reasons",
+								"churches"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Block users",
+			"item": [
+				{
+					"name": "church block user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"church_id\": 1,\r\n    \"user_id\": 2,\r\n    \"days\": 5, // cantidad de dias en los cuales el usuario estara bloqueado en la iglesia\r\n    \"is_indefinite\": false, // Si es true, el bloqueo es indefinido\r\n    \"reason\": \"spam\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/blocked-users/block",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"blocked-users",
+								"block"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "church unblock user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"church_id\": 1,\r\n    \"user_id\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/blocked-users/unblock",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"blocked-users",
+								"unblock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "church blocked users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "app-api-key",
+								"value": "{{app_api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{domain}}/api/{{version}}/blocked-users/1?status=active",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"api",
+								"{{version}}",
+								"blocked-users",
+								"1"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "active",
+									"description": "'active', 'expired'"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
