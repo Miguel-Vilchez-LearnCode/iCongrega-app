@@ -20,6 +20,7 @@ class Http {
   }) async {
     int? statusCode;
     dynamic data;
+    String? rawBody;
     try {
       // Implementación de la solicitud HTTP aquí
       late Uri url;
@@ -44,13 +45,16 @@ class Http {
         timeOut: timeOut,
       );
 
-      data = parseResponseBody(response.body);
+      rawBody = response.body;
+      data = parseResponseBody(rawBody);
       statusCode = response.statusCode;
       if (statusCode >= 400) {
         throw HttpError(
           data: data,
           exception: null,
           stackTrace: StackTrace.current,
+          statusCode: statusCode,
+          body: rawBody,
         );
       }
 
@@ -58,16 +62,29 @@ class Http {
         data: parser != null ? parser(data) : data,
         statusCode: statusCode,
         error: null,
+        body: rawBody,
       );
     } catch (e, s) {
       if (e is HttpError) {
-        return HttpResult<T>(data: null, statusCode: statusCode!, error: e);
+        return HttpResult<T>(
+          data: null,
+          statusCode: e.statusCode ?? statusCode ?? -1,
+          error: e,
+          body: e.body,
+        );
       }
 
       return HttpResult<T>(
         data: null,
-        statusCode: -1,
-        error: HttpError(exception: e, stackTrace: s, data: data),
+        statusCode: statusCode ?? -1,
+        error: HttpError(
+          exception: e,
+          stackTrace: s,
+          data: data,
+          statusCode: statusCode,
+          body: rawBody,
+        ),
+        body: rawBody,
       );
     }
   }

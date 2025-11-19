@@ -17,6 +17,7 @@ class HomeTabs extends StatefulWidget {
 
 class _HomeTabsState extends State<HomeTabs> {
   late int _currentIndex;
+  DateTime? _lastBackPressed;
 
   final _navigatorKeys = [
     GlobalKey<NavigatorState>(), // Feed
@@ -32,13 +33,40 @@ class _HomeTabsState extends State<HomeTabs> {
   }
 
   Future<bool> _onWillPop() async {
-    final NavigatorState currentNavigator =
-        _navigatorKeys[_currentIndex].currentState!;
-    if (currentNavigator.canPop()) {
+    final NavigatorState? currentNavigator =
+        _navigatorKeys[_currentIndex].currentState;
+    if (currentNavigator != null && currentNavigator.canPop()) {
       currentNavigator.pop();
       return false;
     }
-    return true; // allow app to pop (exit or previous screen)
+
+    // If not on Feed tab, go there first
+    if (_currentIndex != 0) {
+      setState(() => _currentIndex = 0);
+      return false;
+    }
+
+    final now = DateTime.now();
+    if (_lastBackPressed == null ||
+        now.difference(_lastBackPressed!) > const Duration(seconds: 2)) {
+      _lastBackPressed = now;
+      _showExitMessage();
+      return false;
+    }
+
+    return true; // exit app
+  }
+
+  void _showExitMessage() {
+    if (!mounted) return;
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        const SnackBar(
+          content: Text('Presiona atrás otra vez para salir'),
+          duration: Duration(seconds: 2),
+        ),
+      );
   }
 
   Widget _buildTabNavigator({

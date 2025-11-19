@@ -4,12 +4,23 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart';
 import 'http_method.dart';
 
-dynamic _parseBody(dynamic body) {
+String? _encodeBody(dynamic body) {
+  if (body == null) return null;
+  if (body is String) return body;
+  if (body is List || body is Map) {
+    return jsonEncode(body);
+  }
+
   try {
-    return json.encode(body.toJson());
-    // return jsonEncode(body);
+    // Intentar serializar objetos con toJson
+    final dynamic jsonReady = body.toJson();
+    return jsonEncode(jsonReady);
   } catch (_) {
-    return body;
+    try {
+      return jsonEncode(body);
+    } catch (_) {
+      return body.toString();
+    }
   }
 }
 
@@ -21,17 +32,24 @@ Future<Response> sendRequest({
   required Duration timeOut,
 }) {
   var finalHeader = {...headers};
+  final appApiKey = dotenv.env['APP_API_KEY'] ?? '';
   // Implementación de la solicitud HTTP
   if (method != HttpMethod.get) {
     final contentType = headers['Content-Type'];
 
-    final appApiKey = dotenv.env['APP_API_KEY'] ?? '';
-
     if (contentType == null || contentType.contains("application/json")) {
       finalHeader['Content-Type'] = 'application/json; charset=UTF-8';
-      finalHeader['app-api-key'] = appApiKey;
       finalHeader['Accept'] = 'application/json';
-      body = _parseBody(body);
+    }
+
+    if (appApiKey.isNotEmpty) {
+      finalHeader['app-api-key'] = appApiKey;
+    }
+
+    body = _encodeBody(body);
+  } else {
+    if (appApiKey.isNotEmpty) {
+      finalHeader['app-api-key'] = appApiKey;
     }
   }
   final client = Client();

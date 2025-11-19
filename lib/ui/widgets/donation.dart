@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icongrega/theme/app_colors.dart';
+import 'package:icongrega/ui/widgets/modals/donation_error_modal.dart';
+import 'package:icongrega/ui/widgets/modals/donation_success_modal.dart';
 import 'package:image_picker/image_picker.dart';
 
 void showOverlayMessage(BuildContext context, String message) {
@@ -583,30 +585,6 @@ class _ConfirmacionStepState extends State<_ConfirmacionStep> {
   bool _isLoading = false;
   File? _paymentProof;
   final TextEditingController _refController = TextEditingController();
-  DateTime? _validatedAt;
-
-  String _formatDateTime(DateTime dt) {
-    const months = [
-      'Ene',
-      'Feb',
-      'Mar',
-      'Abr',
-      'May',
-      'Jun',
-      'Jul',
-      'Ago',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dic',
-    ];
-    final d = dt.day.toString().padLeft(2, '0');
-    final m = months[dt.month - 1];
-    final y = dt.year.toString();
-    final hh = dt.hour.toString().padLeft(2, '0');
-    final mm = dt.minute.toString().padLeft(2, '0');
-    return '$d/$m/$y $hh:$mm';
-  }
 
   void _validarPago(BuildContext context) async {
     setState(() {
@@ -623,7 +601,6 @@ class _ConfirmacionStepState extends State<_ConfirmacionStep> {
     widget.onFinish();
 
     bool esExitoso = Random().nextBool();
-    _validatedAt = DateTime.now();
 
     // Mostrar modal
     showGeneralDialog(
@@ -632,7 +609,7 @@ class _ConfirmacionStepState extends State<_ConfirmacionStep> {
       barrierLabel: "Confirmación",
       transitionDuration: const Duration(milliseconds: 200),
       pageBuilder: (context, anim1, anim2) {
-        return esExitoso ? _modalSuccess(context) : _modalError(context);
+        return esExitoso ? DonationSuccessModal(monto: widget.monto, ref: _refController.text) : DonationErrorModal();
       },
       transitionBuilder: (context, anim1, anim2, child) {
         return FadeTransition(
@@ -858,430 +835,21 @@ class _ConfirmacionStepState extends State<_ConfirmacionStep> {
               ),
               padding: const EdgeInsets.symmetric(vertical: 18),
             ),
-            child: _isLoading
-                ? const SizedBox(
-                    height: 20,
-                    width: 20,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      color: Colors.white,
-                    ),
-                  )
-                : Text(
-                    "Validar pago",
-                    style: GoogleFonts.inter(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color:
-                          _paymentProof == null ||
-                              _refController.text.trim().isEmpty
-                          ? Colors.white
-                          : Colors.black87,
-                    ),
-                  ),
+            child: Text(
+              "Validar pago",
+              style: GoogleFonts.inter(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color:
+                    _paymentProof == null ||
+                        _refController.text.trim().isEmpty
+                    ? Colors.white
+                    : Colors.black87,
+              ),
+            ),
           ),
         ),
       ],
-    );
-  }
-
-  Widget _modalSuccess(BuildContext context) {
-    return AlertDialog(
-      contentPadding: EdgeInsets.all(0),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/bg_pattern.jpg'),
-                fit: BoxFit.cover,
-              ),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(28),
-                topRight: Radius.circular(28),
-              ),
-            ),
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(230, 16, 185, 129),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(28),
-                  topRight: Radius.circular(28),
-                ),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 16),
-                  Icon(
-                    Icons.check_circle_outline,
-                    size: 60,
-                    color: Theme.of(context).colorScheme.surface,
-                  ),
-                  Text(
-                    "Pago exitoso",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: Theme.of(context).colorScheme.surface,
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                ],
-              ),
-            ),
-          ),
-
-          SizedBox(height: 20),
-
-          Container(
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  '¡Listo! Hemos verificado tu pago',
-                  style: GoogleFonts.inter(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-
-          SizedBox(height: 16),
-
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 16),
-            padding: EdgeInsets.symmetric(vertical: 8),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: Theme.of(context).colorScheme.surfaceContainer,
-            ),
-            width: double.infinity,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Monto',
-                  style: GoogleFonts.inter(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.neutralMidDark,
-                  ),
-                ),
-                Text(
-                  '\$ ${widget.monto},00',
-                  style: GoogleFonts.inter(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).colorScheme.secondary,
-                    decoration: TextDecoration.underline,
-                    decorationColor: AppColors.neutralMidDark,
-                    decorationThickness: 1,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Número de Referencia',
-                  style: GoogleFonts.inter(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.neutralMidDark,
-                  ),
-                ),
-                Text(
-                  _refController.text.isEmpty ? '-' : _refController.text,
-                  style: GoogleFonts.inter(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).colorScheme.secondary,
-                    decoration: TextDecoration.underline,
-                    decorationColor: AppColors.neutralMidDark,
-                    decorationThickness: 1,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Fecha',
-                  style: GoogleFonts.inter(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.neutralMidDark,
-                  ),
-                ),
-                Text(
-                  _formatDateTime(_validatedAt ?? DateTime.now()),
-                  style: GoogleFonts.inter(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Theme.of(context).colorScheme.secondary,
-                    decoration: TextDecoration.underline,
-                    decorationColor: AppColors.neutralMidDark,
-                    decorationThickness: 1,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          SizedBox(height: 16),
-
-          Container(
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Resivirás el comprobante oficial por correo',
-                  style: GoogleFonts.inter(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.neutralMidDark,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-
-          SizedBox(height: 20),
-
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primaryLight,
-                      foregroundColor: Colors.black87,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                    ),
-                    child: Text(
-                      "Entendido",
-                      style: GoogleFonts.inter(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-
-          SizedBox(height: 16),
-        ],
-      ),
-    );
-  }
-
-  Widget _modalError(BuildContext context) {
-    return AlertDialog(
-      contentPadding: EdgeInsets.all(0),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/bg_pattern.jpg'),
-                fit: BoxFit.cover,
-              ),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(28),
-                topRight: Radius.circular(28),
-              ),
-            ),
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: const Color.fromARGB(230, 255, 141, 10),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(28),
-                  topRight: Radius.circular(28),
-                ),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 16),
-                  Icon(
-                    Icons.error_outline_outlined,
-                    color: Theme.of(context).colorScheme.surface,
-                    size: 60,
-                  ),
-                  Text(
-                    "Error al verificar",
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.surface,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  SizedBox(height: 16),
-                ],
-              ),
-            ),
-          ),
-
-          SizedBox(height: 20),
-
-          Container(
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'No pudimos confirmar tu pago automáticamente',
-                  style: GoogleFonts.inter(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-
-          SizedBox(height: 16),
-
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 16),
-            padding: EdgeInsets.symmetric(vertical: 8),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: Theme.of(context).colorScheme.surfaceContainer,
-            ),
-            width: double.infinity,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ListTile(
-                  leading: Text(
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
-                    '•',
-                  ),
-                  title: Text(
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
-                    'Revisa que el monto y referencia coincidan',
-                  ),
-                ),
-                ListTile(
-                  leading: Text(
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
-                    '•',
-                  ),
-                  title: Text(
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Theme.of(context).colorScheme.secondary,
-                    ),
-                    'vuelve a subir el comprobante nítido',
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          SizedBox(height: 16),
-
-          Container(
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Si el problema persiste, contacta a soporte@icongrega.com o al 04123854793',
-                  style: GoogleFonts.inter(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w500,
-                    color: AppColors.neutralMidDark,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-
-          SizedBox(height: 20),
-
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primaryLight,
-                      foregroundColor: Colors.black87,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                    ),
-                    child: Text(
-                      "Entendido",
-                      style: GoogleFonts.inter(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-
-          SizedBox(height: 16),
-        ],
-      ),
     );
   }
 }

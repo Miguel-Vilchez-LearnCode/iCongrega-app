@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icongrega/domain/models/post_item.dart' as model;
+import 'package:icongrega/domain/models/user.dart' as model;
+import 'package:icongrega/providers/auth_provider.dart';
 import 'package:icongrega/theme/app_colors.dart';
+import 'package:icongrega/ui/screens/auth/upload_image_screen.dart';
 import 'package:icongrega/ui/screens/feed/detail_pager_screen.dart';
 import 'package:icongrega/ui/screens/events/detail_event_screen.dart';
 import 'package:icongrega/ui/screens/profile/edit_church_profile_screen.dart';
@@ -10,6 +13,8 @@ import 'package:icongrega/ui/screens/profile/messages_church_screen.dart';
 import 'package:icongrega/ui/screens/profile/messages_user_screen.dart';
 import 'package:icongrega/ui/screens/settings/settings_screen.dart';
 import 'package:icongrega/ui/widgets/donation.dart';
+import 'package:icongrega/ui/widgets/modals/logout_modal.dart';
+import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -35,6 +40,20 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  AuthProvider get auth => context.watch<AuthProvider>();
+  model.User? get user => auth.currentUser;
+
+  ImageProvider<Object> _profileImageProvider(model.User? user) {
+    final photo = user?.profileImage;
+    if (photo != null && photo.isNotEmpty) {
+      if (photo.startsWith('http')) {
+        return NetworkImage(photo);
+      }
+      return AssetImage(photo);
+    }
+    return const AssetImage('assets/images/profile.png');
+  }
+
   bool _isLoadingPage = false;
 
   late final List<model.PostItem> _posts;
@@ -64,6 +83,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
     setState(() {
       _selectedProfileIndex = index;
     });
+  }
+
+  void _modalAcountDelete(BuildContext context) {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: "Confirmación",
+      transitionDuration: const Duration(milliseconds: 200),
+      pageBuilder: (context, anim1, anim2) {
+        return const LogoutModal();
+      },
+      transitionBuilder: (context, anim1, anim2, child) {
+        return FadeTransition(
+          opacity: anim1,
+          child: ScaleTransition(scale: anim1, child: child),
+        );
+      },
+    );
   }
 
   @override
@@ -234,7 +271,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 foregroundColor:
                                                     Colors.redAccent[700],
                                               ),
-                                              onPressed: () {},
+                                              onPressed: () =>
+                                                  _modalAcountDelete(context),
                                               child: Text(
                                                 'Cerrar Sesión',
                                                 style: GoogleFonts.inter(
@@ -480,9 +518,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                                         12,
                                                                       ),
                                                                   image: DecorationImage(
-                                                                    image: AssetImage(
-                                                                      "assets/images/profile.png",
-                                                                    ),
+                                                                    image:
+                                                                        _profileImageProvider(
+                                                                          user,
+                                                                        ),
                                                                     fit: BoxFit
                                                                         .cover,
                                                                   ),
@@ -522,7 +561,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                         foregroundColor:
                                                             Colors.black,
                                                       ),
-                                                      onPressed: () {},
+                                                      onPressed: () {
+                                                        Navigator.push(
+                                                          context,
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                UploadImageScreen(),
+                                                          ),
+                                                        );
+                                                      },
                                                       child: Text(
                                                         'Cambiar Foto',
                                                         style: GoogleFonts.inter(
@@ -556,9 +603,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         image: DecorationImage(
-                                          image: AssetImage(
-                                            "assets/images/profile.png",
-                                          ),
+                                          image: _profileImageProvider(user),
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -571,7 +616,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 16),
                             child: Text(
-                              'Joaquin Puerta',
+                              user?.fullName ?? 'User Name',
                               style: GoogleFonts.inter(
                                 color: Theme.of(context).colorScheme.background,
                                 fontWeight: FontWeight.w600,
@@ -611,9 +656,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Container(
                             padding: EdgeInsets.symmetric(horizontal: 20),
                             child: Text(
-                              'Soy una persona que vive con Dios, por El y para El... y me encantan las publicaciones de mis lideres en esta aplicacion.',
+                              user?.about ?? 'Sin descripción',
                               style: GoogleFonts.inter(
-                                color: Theme.of(context).colorScheme.background,
+                                color: Theme.of(context).colorScheme.onSurface,
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12,
                               ),
@@ -810,7 +855,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   child: InkWell(
                                     onTap: () {
                                       Share.share(
-                                        'Compariendo mi Perfil personal...!!',
+                                        'Compartiendo mi Perfil personal...!!',
                                       );
                                     },
                                     child: Icon(

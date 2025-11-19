@@ -5,6 +5,7 @@ import 'package:icongrega/ui/screens/auth/sign_up_screen.dart';
 import 'package:icongrega/ui/screens/root/home_tabs.dart';
 import 'package:icongrega/ui/screens/forgot/forgot_password_screen.dart';
 import 'package:icongrega/theme/app_colors.dart';
+import 'package:icongrega/ui/widgets/modals/loading_modal.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -22,6 +23,39 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
 
   bool _obscure = true;
+  bool _isDialogVisible = false;
+  AuthProvider? _authProvider;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final authProvider = Provider.of<AuthProvider>(context);
+    if (_authProvider != authProvider) {
+      _authProvider?.removeListener(_authListener);
+      _authProvider = authProvider;
+      _authProvider?.addListener(_authListener);
+      _authListener();
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void _authListener() {
+    if (!mounted) return;
+    final authProvider = _authProvider;
+    if (authProvider == null) return;
+
+    if (authProvider.isLoading && !_isDialogVisible) {
+      _isDialogVisible = true;
+      _modalProgress(context);
+    } else if (!authProvider.isLoading && _isDialogVisible) {
+      Navigator.of(context, rootNavigator: true).pop();
+      _isDialogVisible = false;
+    }
+  }
 
   void _submitForm(AuthProvider authProvider) async {
     if (_formKey.currentState!.validate()) {
@@ -40,14 +74,38 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  void _modalProgress(BuildContext context) {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: false,
+      transitionDuration: const Duration(milliseconds: 200),
+      pageBuilder: (context, anim1, anim2) {
+        return LoadingModal();
+      },
+      transitionBuilder: (context, anim1, anim2, child) {
+        return FadeTransition(
+          opacity: anim1,
+          child: ScaleTransition(scale: anim1, child: child),
+        );
+      },
+    );
+  }
+
   void _navigateToHome() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeTabs()));
+    Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => const HomeTabs()),
+      (route) => false,
+    );
   }
 
   @override
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    _authProvider?.removeListener(_authListener);
+    if (_isDialogVisible) {
+      Navigator.of(context, rootNavigator: true).pop();
+    }
     super.dispose();
   }
 
@@ -272,29 +330,29 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ],
                               ),
                             ),
-                      
+                          
                           // Botón principal
-                          authProvider.isLoading
-                            ? CircularProgressIndicator()
-                            : ElevatedButton(
-                                onPressed: () => _submitForm(authProvider),
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.primaryLight,
-                                  foregroundColor:
-                                      AppColors.neutralBlack, // Colors.black87
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  padding: const EdgeInsets.symmetric(vertical: 18),
-                                ),
-                                child: const Text(
-                                  "Iniciar sesión",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
+                          ElevatedButton(
+                            onPressed: () {
+                              _submitForm(authProvider);
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.primaryLight,
+                              foregroundColor:
+                                  AppColors.neutralBlack, // Colors.black87
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12),
                               ),
+                              padding: const EdgeInsets.symmetric(vertical: 18),
+                            ),
+                            child: const Text(
+                              "Iniciar sesión",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
                       
                           const SizedBox(height: 16),
                       

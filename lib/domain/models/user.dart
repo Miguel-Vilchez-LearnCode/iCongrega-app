@@ -31,4 +31,16 @@ class User {
 
   // Método útil para obtener el nombre completo
   String get fullName => '$name $lastname';
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'lastname': lastname,
+      'email': email,
+      'profile_image': profileImage,
+      'about': about,
+      'religion_id': religionId,
+    };
+  }
 }

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:icongrega/ui/screens/auth/login_screen.dart';
 import 'package:icongrega/ui/screens/auth/register_church_screen.dart';
-import 'package:icongrega/ui/screens/auth/select_religion_screen.dart';
 import 'package:icongrega/theme/app_colors.dart';
+import 'package:icongrega/ui/screens/auth/select_religion_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -16,11 +16,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final primary = const Color.fromARGB(255, 226, 170, 0);
 
   final TextEditingController _passwordCtrl = TextEditingController();
+  final TextEditingController _nameCtrl = TextEditingController();
+  final TextEditingController _lastNameCtrl = TextEditingController();
+  final TextEditingController _emailCtrl = TextEditingController();
   bool _obscure = true;
 
   double _strength = 0.0; // 0.0 a 1.0
 
-  // Any non-alphanumeric counts as especial
+  // Caracteres especiales
   final RegExp _digit = RegExp(r"\d");
   final RegExp _lower = RegExp(r"[a-z]");
   final RegExp _special = RegExp(r"[^A-Za-z0-9]");
@@ -31,15 +34,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
     final hasLower = _lower.hasMatch(value);
     final hasSpecial = _special.hasMatch(value);
 
-    // Strength heuristic: reward length and variety
     int strengthScore = 0;
     if (lengthOK) strengthScore++;
     if (hasLower) strengthScore++;
     if (hasDigit) strengthScore++;
     if (hasSpecial) strengthScore++;
-    // Additional bump for longer length >= 12
+    //  Aumento adicional para longitudes >= 12
     if (value.length >= 12) strengthScore++;
-    final strength = strengthScore / 5.0; // normalize to 0..1
+    final strength = strengthScore / 5.0; // normalizar to 0..1
 
     setState(() {
       _strength = strength.clamp(0.0, 1.0);
@@ -51,6 +53,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
     if (v < 0.67) return Colors.orange;
     return Colors.green;
   }
+
+  void _submit() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SelectReligionScreen(
+          nameCtrl: _nameCtrl.text,
+          lastNameCtrl: _lastNameCtrl.text,
+          emailCtrl: _emailCtrl.text,
+          passwordCtrl: _passwordCtrl.text,
+        ),
+      ),
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -139,6 +156,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: TextField(
+                        controller: _emailCtrl,
                         decoration: InputDecoration(
                           hintText: "Correo electrónico",
                           hintStyle: TextStyle(
@@ -179,6 +197,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: TextField(
+                              controller: _nameCtrl,
                               decoration: InputDecoration(
                                 hintText: "Nombre",
                                 hintStyle: TextStyle(
@@ -216,6 +235,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: TextField(
+                              controller: _lastNameCtrl,
                               decoration: InputDecoration(
                                 hintText: "Apellido",
                                 hintStyle: TextStyle(
@@ -357,12 +377,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     // Botón principal
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => SelectReligionScreen(),
-                          ),
-                        );
+                        _submit();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: primary,

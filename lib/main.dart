@@ -1,19 +1,19 @@
-// import 'package:icongrega/ui/examples/color_migration_examples.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:icongrega/data/data_source/remote/auth_api.dart';
 import 'package:icongrega/data/helpers/http.dart';
 import 'package:icongrega/data/repositories_impl/auth_repository_impl.dart';
 import 'package:icongrega/domain/repositories/auth_repository.dart';
 import 'package:icongrega/providers/auth_provider.dart';
+import 'package:icongrega/providers/religion_provider.dart';
+import 'package:icongrega/providers/theme_provider.dart';
 import 'package:icongrega/theme/app_colors.dart';
-import 'package:icongrega/ui/screens/auth/login_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:icongrega/theme/app_theme.dart';
 import 'package:icongrega/theme/theme_helpers.dart';
-import 'package:icongrega/providers/theme_provider.dart';
+import 'package:icongrega/ui/screens/auth/login_screen.dart';
 import 'package:icongrega/ui/screens/root/home_tabs.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 // main asincrono
 Future<void> main() async {
@@ -23,34 +23,39 @@ Future<void> main() async {
   // Carga el archivo .env para las variables de entorno
   await dotenv.load(fileName: ".env");
 
-  // ejecutar app con provider para el tema
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      child: const MyApp(),
-    ),
-  );
+  final http = Http();
+  final authRepository = AuthRepositoryImpl(AuthAPI(http));
+
+  runApp(MyApp(authRepository: authRepository));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final AuthRepository authRepository;
+
+  const MyApp({super.key, required this.authRepository});
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => ReligionProvider()),
+        Provider<AuthRepository>.value(value: authRepository),
         ChangeNotifierProvider(
-          create: (context) => ThemeProvider(),
+          create: (_) => AuthProvider(authRepository)..restoreSession(),
         ),
-        ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
-      child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
-          themeMode: ThemeProvider().themeMode,
-          home: const SplashScreen(),
-        ),
+      child: Consumer<ThemeProvider>(
+        builder: (_, themeProvider, __) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: themeProvider.themeMode,
+            home: const SplashScreen(),
+          );
+        },
+      ),
     );
   }
 }
@@ -74,8 +79,6 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
 
-    final http = Http();
-
     // Animación scale in / scale out
     _scaleController = AnimationController(
       vsync: this,
@@ -89,41 +92,26 @@ class _SplashScreenState extends State<SplashScreen>
     // Inicia animación scale in
     _scaleController.forward();
 
-    final AuthRepository auth = AuthRepositoryImpl(AuthAPI(http));
     // verificar si el usuario ya está autenticado
-    // y redirigirlo directamente a la pantalla principal si es así.
-    auth.accessToken.then((token) {
+    final authProvider = Provider.of<AuthProvider>(context, listen: false);
+    authProvider.getStoredToken().then((token) {
       Future.delayed(Duration(milliseconds: splashDuration), () async {
         await _scaleController.reverse(); // scale out
-        if (mounted) {
-          if (token != null && token != 'null') {
-            // Usuario autenticado
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const HomeTabs()),
-            );
-          } else {
-            // Usuario no autenticado, redirigir a pantalla de login
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()),
-            );
-          }
+        if (!mounted) return;
+
+        if (token != null && token.isNotEmpty && token != 'null') {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeTabs()),
+          );
+        } else {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const LoginScreen()),
+          );
         }
       });
     });
-
-
-    // Después del tiempo definido, hace scale out y redirige
-    // Future.delayed(Duration(milliseconds: splashDuration), () async {
-    //   await _scaleController.reverse(); // scale out
-    //   if (mounted) {
-    //     Navigator.pushReplacement(
-    //       context,
-    //       MaterialPageRoute(builder: (context) => const LoginScreen()),
-    //     );
-    //   }
-    // });
   }
 
   @override
